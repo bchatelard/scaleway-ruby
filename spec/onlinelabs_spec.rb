@@ -19,7 +19,7 @@ describe OnlineLabs do
     its(:token)            { should eq "token_required" }
     its(:organization)     { should eq "organization_required" }
 
-    it { expect(OnlineLabs::VERSION).to eq "0.1.0" }
+    it { expect(OnlineLabs::VERSION).to eq "0.1.1" }
   end
 
   describe "test token and organization" do
