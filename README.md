@@ -160,7 +160,7 @@ add this to your gemfile:
 
 	# create 5 new servers
 	5.times do |x|
-		OnlineLabs::Server.create name: "docker#{x}', image: image.id, tags: ['docker']
+		OnlineLabs::Server.create name: "docker#{x}", image: image.id, tags: ['docker']
 	end
 
 	# power on
