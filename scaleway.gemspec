@@ -1,15 +1,17 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'onlinelabs/version'
+require 'scaleway/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "onlinelabs"
-  gem.version       = OnlineLabs::VERSION
+  gem.name          = "scaleway"
+  gem.version       = Scaleway::VERSION
   gem.authors       = ["bchatelard"]
   gem.email         = ["chatel.bast@gmail.com"]
-  gem.description   = %q{Ruby bindings for the Online Labs API.}
-  gem.summary       = %q{Ruby bindings for the Online Labs API.}
+  gem.description   = %q{Ruby bindings for the Scaleway API.}
+  gem.summary       = %q{Ruby bindings for the Scaleway API.}
+
+  # should change
   gem.homepage      = "http://github.com/bchatelard/onlinelabs-ruby"
 
   gem.add_dependency "faraday", "~> 0.9"
