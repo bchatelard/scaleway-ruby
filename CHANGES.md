@@ -3,6 +3,7 @@
 ## 0.1.2 (Unreleased)
 
 - Rename to scaleway.
+- Add the ability to reboot.
 
 ## 0.1.1 (2014-11-14)
 
