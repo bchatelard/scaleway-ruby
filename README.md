@@ -1,5 +1,8 @@
 # Scaleway Rubygem
 
+[![Build Status](https://travis-ci.org/bchatelard/scaleway-ruby.svg?branch=develop)](https://travis-ci.org/bchatelard/scaleway-ruby)
+[![Gem Version](https://badge.fury.io/rb/scaleway.svg)](http://badge.fury.io/rb/scaleway)
+
 Easy to use Scaleway api client.
 
 ## Installation
