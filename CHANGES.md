@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.2.2 (Unreleased)
+
+- No entry.
+
 ## 0.2.0 (2015-04-23)
 
 - Rename to scaleway.
