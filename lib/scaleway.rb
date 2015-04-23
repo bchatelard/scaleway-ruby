@@ -182,6 +182,13 @@ module Scaleway
           :action => :poweron
         }
       },
+      :reboot => {
+        :method => :post,
+        :endpoint => "#{Scaleway.compute_endpoint}/servers/%s/action",
+        :default_params => {
+          :action => :reboot
+        }
+      },
       :power_off => {
         :method => :post,
         :endpoint => "#{Scaleway.compute_endpoint}/servers/%s/action",
