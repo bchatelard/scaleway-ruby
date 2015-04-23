@@ -1,25 +1,25 @@
 require 'rubygems'
 require 'its'
-require 'onlinelabs'
+require 'scaleway'
 
-describe OnlineLabs do
-  subject(:OnlineLabs) { described_class }
+describe Scaleway do
+  subject(:Scaleway) { described_class }
 
   before do
-    OnlineLabs.organization = organization
-    OnlineLabs.token = token
+    Scaleway.organization = organization
+    Scaleway.token = token
   end
 
   describe "defaults" do
     let(:organization)   { nil }
     let(:token)          { nil }
 
-    its(:compute_endpoint) { should eq "https://api.cloud.online.net" }
-    its(:account_endpoint) { should eq "https://account.cloud.online.net" }
+    its(:compute_endpoint) { should eq "https://api.scaleway.com" }
+    its(:account_endpoint) { should eq "https://account.scaleway.com" }
     its(:token)            { should eq "token_required" }
     its(:organization)     { should eq "organization_required" }
 
-    it { expect(OnlineLabs::VERSION).to eq "0.1.2" }
+    it { expect(Scaleway::VERSION).to eq "0.1.2" }
   end
 
   describe "test token and organization" do
