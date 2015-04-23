@@ -2,7 +2,7 @@
 
 ## 0.1.2 (Unreleased)
 
-- No entry.
+- Rename to scaleway.
 
 ## 0.1.1 (2014-11-14)
 

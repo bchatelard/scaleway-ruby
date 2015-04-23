@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{Ruby bindings for the Scaleway API.}
 
   # should change
-  gem.homepage      = "http://github.com/bchatelard/onlinelabs-ruby"
+  gem.homepage      = "http://github.com/bchatelard/scaleway-ruby"
 
   gem.add_dependency "faraday", "~> 0.9"
   gem.add_dependency "faraday_middleware", "~> 0.9"
