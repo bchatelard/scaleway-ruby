@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.2.2 (Unreleased)
+
+- No entry.
+
 ## 0.2.1 (2015-04-32)
 
 - Fix unittests.
