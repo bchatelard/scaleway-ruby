@@ -1,6 +1,6 @@
 # ChangeLog
 
-## 0.1.2 (Unreleased)
+## 0.2.0 (2015-04-23)
 
 - Rename to scaleway.
 - Add the ability to reboot.
