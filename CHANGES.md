@@ -2,7 +2,7 @@
 
 ## 0.2.2 (Unreleased)
 
-- No entry.
+- Add explicit error on missing authentication.
 
 ## 0.2.1 (2015-04-32)
 

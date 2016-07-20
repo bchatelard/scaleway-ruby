@@ -269,6 +269,10 @@ module Scaleway
       if v.respond_to? :call then [k, v.call()] else [k, v] end
     }]
 
+    if Scaleway.request.nil?
+      raise ::RuntimeError.new("Authentication is missing")
+    end
+
     resp = Scaleway.request.send(query[:method], endpoint, body)
     body = resp.body
     if resp.status == 204
