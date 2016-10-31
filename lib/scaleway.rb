@@ -279,7 +279,7 @@ module Scaleway
     end
 
     body = Hash[body.map { |k, v|
-      if v.respond_to? :call then [k, v.call()] else [k, v] end
+      if v.respond_to? :call then [k, v.call(params, body)] else [k, v] end
     }]
 
     if Scaleway.request.nil?
