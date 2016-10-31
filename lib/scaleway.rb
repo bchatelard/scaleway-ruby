@@ -230,6 +230,7 @@ module Scaleway
         :default_params => {
           :name => 'default',
           :image => Proc.new { Scaleway::Image.find_by_name('Ubuntu').id },
+          :commercial_type => 'VC1S',
           :volumes => {},
           :organization => Proc.new { Scaleway.organization },
         }

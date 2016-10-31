@@ -4,6 +4,7 @@
 
 - Add explicit error on missing authentication.
 - Add zone option.
+- Update default commercial type to VC1S.
 
 ## 0.2.1 (2015-04-32)
 
