@@ -8,11 +8,20 @@ module Scaleway
   extend self
 
   def compute_endpoint
-    "https://api.scaleway.com"
+    "https://cp-#{Scaleway.zone}.scaleway.com"
   end
 
   def account_endpoint
     "https://account.scaleway.com"
+  end
+
+  def zone=(zone)
+    @zone = zone
+    @zone
+  end
+
+  def zone
+    return @zone || 'par1'
   end
 
   def token=(token)
@@ -41,25 +50,25 @@ module Scaleway
     "Image" => {
       :all => {
         :method => :get,
-        :endpoint => "#{Scaleway.compute_endpoint}/images",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/images" },
         :default_params => {
           :organization => Proc.new { Scaleway.organization }
         }
       },
       :marketplace => {
         :method => :get,
-        :endpoint => "#{Scaleway.compute_endpoint}/images",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/images" },
         :default_params => {
           :public => true
         }
       },
       :find => {
         :method => :get,
-        :endpoint => "#{Scaleway.compute_endpoint}/images/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/images/%s" },
       },
       :find_by_name => {
         :method => :get,
-        :endpoint => "#{Scaleway.compute_endpoint}/images",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/images" },
         :filters => [
           Proc.new { |item, params| item.name.include? params.first }
         ],
@@ -67,7 +76,7 @@ module Scaleway
       },
       :create => {
         :method => :post,
-        :endpoint => "#{Scaleway.compute_endpoint}/images",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/images" },
         :default_params => {
           :name => 'default',
           :root_volume => 'required',
@@ -76,33 +85,33 @@ module Scaleway
       },
       :edit => {
         :method => :put,
-        :endpoint => "#{Scaleway.compute_endpoint}/images/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/images/%s" },
       },
       :destroy => {
         :method => :delete,
-        :endpoint => "#{Scaleway.compute_endpoint}/images/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/images/%s" },
       },
     },
     "Volume" => {
       :all => {
         :method => :get,
-        :endpoint => "#{Scaleway.compute_endpoint}/volumes",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/volumes" },
       },
       :find => {
         :method => :get,
-        :endpoint => "#{Scaleway.compute_endpoint}/volumes/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/volumes/%s" },
       },
       :edit => {
         :method => :put,
-        :endpoint => "#{Scaleway.compute_endpoint}/volumes/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/volumes/%s" },
       },
       :destroy => {
         :method => :delete,
-        :endpoint => "#{Scaleway.compute_endpoint}/volumes/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/volumes/%s" },
       },
       :create => {
         :method => :post,
-        :endpoint => "#{Scaleway.compute_endpoint}/volumes",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/volumes" },
         :default_params => {
           :name => 'default',
           :size => 20 * 10**9,
@@ -114,30 +123,30 @@ module Scaleway
     "Ip" => {
       :all => {
         :method => :get,
-        :endpoint => "#{Scaleway.compute_endpoint}/ips",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/ips" },
       },
       :find => {
         :method => :get,
-        :endpoint => "#{Scaleway.compute_endpoint}/ips/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/ips/%s" },
       },
       :edit => {
         :method => :put,
-        :endpoint => "#{Scaleway.compute_endpoint}/ips/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/ips/%s" },
       },
       :destroy => {
         :method => :delete,
-        :endpoint => "#{Scaleway.compute_endpoint}/ips/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/ips/%s" },
       },
       :reserve => {
         :method => :post,
-        :endpoint => "#{Scaleway.compute_endpoint}/ips",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/ips" },
         :default_params => {
           :organization => Proc.new { Scaleway.organization },
         }
       },
       :create => {
         :method => :post,
-        :endpoint => "#{Scaleway.compute_endpoint}/ips",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/ips" },
         :default_params => {
           :organization => Proc.new { Scaleway.organization },
         }
@@ -146,23 +155,23 @@ module Scaleway
     "Snapshot" => {
       :all => {
         :method => :get,
-        :endpoint => "#{Scaleway.compute_endpoint}/snapshots",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/snapshots" },
       },
       :find => {
         :method => :get,
-        :endpoint => "#{Scaleway.compute_endpoint}/snapshots/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/snapshots/%s" },
       },
       :edit => {
         :method => :put,
-        :endpoint => "#{Scaleway.compute_endpoint}/snapshots/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/snapshots/%s" },
       },
       :destroy => {
         :method => :delete,
-        :endpoint => "#{Scaleway.compute_endpoint}/snapshots/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/snapshots/%s" },
       },
       :create => {
         :method => :post,
-        :endpoint => "#{Scaleway.compute_endpoint}/snapshots",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/snapshots" },
         :default_params => {
           :name => 'default',
           :volume_id => 'required',
@@ -173,51 +182,51 @@ module Scaleway
     "Server" => {
       :all => {
         :method => :get,
-        :endpoint => "#{Scaleway.compute_endpoint}/servers",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/servers" },
       },
       :power_on => {
         :method => :post,
-        :endpoint => "#{Scaleway.compute_endpoint}/servers/%s/action",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/servers/%s/action" },
         :default_params => {
           :action => :poweron
         }
       },
       :reboot => {
         :method => :post,
-        :endpoint => "#{Scaleway.compute_endpoint}/servers/%s/action",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/servers/%s/action" },
         :default_params => {
           :action => :reboot
         }
       },
       :power_off => {
         :method => :post,
-        :endpoint => "#{Scaleway.compute_endpoint}/servers/%s/action",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/servers/%s/action" },
         :default_params => {
           :action => :poweroff
         }
       },
       :terminate => {
         :method => :post,
-        :endpoint => "#{Scaleway.compute_endpoint}/servers/%s/action",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/servers/%s/action" },
         :default_params => {
           :action => :terminate
         }
       },
       :find => {
         :method => :get,
-        :endpoint => "#{Scaleway.compute_endpoint}/servers/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/servers/%s" },
       },
       :edit => {
         :method => :put,
-        :endpoint => "#{Scaleway.compute_endpoint}/servers/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/servers/%s" },
       },
       :destroy => {
         :method => :delete,
-        :endpoint => "#{Scaleway.compute_endpoint}/servers/%s",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/servers/%s" },
       },
       :create => {
         :method => :post,
-        :endpoint => "#{Scaleway.compute_endpoint}/servers",
+        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/servers" },
         :default_params => {
           :name => 'default',
           :image => Proc.new { Scaleway::Image.find_by_name('Ubuntu').id },
@@ -256,6 +265,10 @@ module Scaleway
     body = {}
     body.merge! query[:default_params] || {}
     endpoint = query[:endpoint]
+
+    if endpoint.respond_to? :call
+      endpoint = endpoint.call()
+    end
 
     params.each do |param|
       if param.is_a? Hash or param.is_a? RecursiveOpenStruct

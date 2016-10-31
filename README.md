@@ -28,6 +28,9 @@ require 'scaleway'
 
 Scaleway.organization = <organization_key>
 Scaleway.token = <token>
+
+# You can specify the zone, the default zone is 'par1'
+Scaleway.zone = 'ams1'
 ```
 
 ### Servers
