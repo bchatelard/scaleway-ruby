@@ -264,8 +264,16 @@ module Scaleway
         :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/servers" },
         :default_params => {
           :name => 'default',
-          :image => Proc.new { Scaleway::Image.find_by_name('Ubuntu').id },
           :commercial_type => 'VC1S',
+          :image => Proc.new { |params, body|
+            if body[:commercial_type] == 'C1'
+              arch = 'arm'
+            else
+              arch = 'x86_64'
+            end
+            Scaleway::Marketplace.find_local_image_by_name(
+              'Ubuntu Xenial', arch: arch).id
+          },
           :volumes => {},
           :organization => Proc.new { Scaleway.organization },
         }
