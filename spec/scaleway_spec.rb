@@ -21,7 +21,7 @@ describe Scaleway do
     its(:token)            { should eq "token_required" }
     its(:organization)     { should eq "organization_required" }
 
-    it { expect(Scaleway::VERSION).to eq "1.0.0" }
+    it { expect(Scaleway::VERSION).to eq "1.0.1" }
   end
 
   describe "test ams1" do

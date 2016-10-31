@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.1 (Unreleased)
+
+- No entry.
+
 ## 1.0.0 (2016-10-31)
 
 - Add explicit error on missing authentication.
