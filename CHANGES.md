@@ -1,6 +1,6 @@
 # ChangeLog
 
-## 0.2.2 (Unreleased)
+## 1.0.0 (2016-10-31)
 
 - Add explicit error on missing authentication.
 - Add zone option.
