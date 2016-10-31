@@ -192,8 +192,8 @@ require 'scaleway'
 Scaleway.organization = <organization_key>
 Scaleway.token = <token>
 
-# get the docker image
-image = Scaleway::Image.find_by_name('Docker')
+# get the docker image from the marketplace
+image = Scaleway::Marketplace.find_local_image_by_name('Docker')
 
 # create 5 new servers
 5.times do |x|
