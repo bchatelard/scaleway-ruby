@@ -67,14 +67,27 @@ Scaleway::Server.terminate server.id
 Scaleway::Server.destroy server.id
 ```
 
+### Marketplace
+
+```ruby
+# list all marketplace images
+Scaleway::Marketplace.all
+
+# get local image by id
+image = Scaleway::Marketplace.find_local_image <marketplace_image_id>
+
+# get local image by marketplace image id for arch arm
+image = Scaleway::Marketplace.find_local_image <marketplace_image_id>, arch: 'arm'
+
+# get local image by name
+image = Scaleway::Marketplace.find_local_image_by_name("Docker")
+```
+
 ### Images
 
 ```ruby
 # list all images
 Scaleway::Image.all
-
-# list marketplace images
-Scaleway::Image.marketplace
 
 # get image by id
 image = Scaleway::Image.find <image_id>

@@ -15,6 +15,10 @@ module Scaleway
     "https://account.scaleway.com"
   end
 
+  def marketplace_endpoint
+    "https://api-marketplace.scaleway.com"
+  end
+
   def zone=(zone)
     @zone = zone
     @zone
@@ -47,15 +51,46 @@ module Scaleway
   end
 
   DEFINITIONS = {
-    "Image" => {
+    "Marketplace" => {
       :all => {
         :method => :get,
-        :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/images" },
-        :default_params => {
-          :organization => Proc.new { Scaleway.organization }
-        }
+        :endpoint => "#{Scaleway.marketplace_endpoint}/images",
       },
-      :marketplace => {
+      :find_local_image_by_name => {
+        :method => :get,
+        :endpoint => "#{Scaleway.marketplace_endpoint}/images",
+        :default_params => {
+            arch: 'x86_64',
+        },
+        :filters => [
+          Proc.new { |params, body, item|
+            item.name.include? params.first }
+        ],
+        :transform => Proc.new { |params, body, item|
+          item[0].versions[0].local_images.keep_if do |local_image|
+            if local_image.zone == Scaleway.zone and local_image.arch == body[:arch]
+              true
+            end
+          end.first
+        },
+      },
+      :find_local_image => {
+        :method => :get,
+        :endpoint => "#{Scaleway.marketplace_endpoint}/images/%s/versions/current",
+        :default_params => {
+            arch: 'x86_64',
+        },
+        :transform => Proc.new { |params, body, item|
+          item.local_images.keep_if do |local_image|
+            if local_image.zone == Scaleway.zone and local_image.arch == body[:arch]
+              true
+            end
+          end.first
+        },
+      },
+    },
+    "Image" => {
+      :all => {
         :method => :get,
         :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/images" },
         :default_params => {
