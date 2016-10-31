@@ -3,6 +3,7 @@
 ## 0.2.2 (Unreleased)
 
 - Add explicit error on missing authentication.
+- Add zone option.
 
 ## 0.2.1 (2015-04-32)
 
