@@ -70,9 +70,9 @@ module Scaleway
         :method => :get,
         :endpoint => Proc.new { "#{Scaleway.compute_endpoint}/images" },
         :filters => [
-          Proc.new { |item, params| item.name.include? params.first }
+          Proc.new { |params, body, item| item.name.include? params.first }
         ],
-        :transform => Proc.new { |item, params| item.first },
+        :transform => Proc.new { |params, body, item| item.first },
       },
       :create => {
         :method => :post,
@@ -287,7 +287,7 @@ module Scaleway
     end
 
     resp = Scaleway.request.send(query[:method], endpoint, body)
-    body = resp.body
+    response_body = resp.body
     if resp.status == 204
       return
     end
@@ -298,23 +298,23 @@ module Scaleway
       raise Scaleway::APIError, resp
     end
 
-    hash = RecursiveOpenStruct.new(body, :recurse_over_arrays => true)
+    hash = RecursiveOpenStruct.new(response_body, :recurse_over_arrays => true)
 
-    if body.length == 1
-      hash = hash.send(body.keys.first)
+    if response_body.length == 1
+      hash = hash.send(response_body.keys.first)
     end
 
     if query[:filters]
       filters = query[:filters]
       hash = hash.find_all do |item|
         filters.all? do |filter|
-          filter.call(item, params)
+          filter.call(params, body, item)
         end
       end
     end
 
     if query[:transform]
-      hash = query[:transform].call(hash, params)
+      hash = query[:transform].call(params, body, hash)
     end
 
     hash
