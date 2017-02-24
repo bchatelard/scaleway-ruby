@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "faraday", "~> 0.9"
   gem.add_dependency "faraday_middleware", "~> 0.9"
-  gem.add_dependency "recursive-open-struct", "~> 0.5"
+  gem.add_dependency "recursive-open-struct", "~> 1.0"
 
   gem.add_development_dependency "rake", "~> 10.1"
   gem.add_development_dependency "rspec", "~> 3.1"
